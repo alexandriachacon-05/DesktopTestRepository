@@ -1,120 +1,238 @@
-<!DOCTYPE html>
-<html>
-<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
+<!DOCTYPE html> 
+<html> 
+<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.  Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
  
 THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
-
-
+ 
+ 
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Philip, Gracie, Alexandria, Adya, Nathalie, Koustubh
+ 
+Further Information:
+http://cns.utexas.edu/fri
+ 
+Research Educator:
+Timothy Riedel
+triedel@utexas.edu
+ 
+Brief Description of Goal of Code:
+To diagnose skin cancer
+ 
+Known Issues:
+None
 
-Further Information: http://cns.utexas.edu/fri
-
-Research Educator: Timothy Riedel triedel@utexas.edu
-
-Brief Description of Goal of Code: The goal of this code is to present a working website that acts as a sort of diagnostic device to use four questions in order to diagnose whether a person is experiencing allergies or the presence of a cold. This website uses buttons to calculate a probability of allergies vs. a cold.
-
-Known Issues: As of this moment, there appears to be no known issues in the code. It appears to be up and running successfully.
-
-https://www.w3schools.com/w3css/default.asp https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file -->
-
-<head>
-    <title>Is it a cold or allergies?</title> <!--Changed name of website title from "Hello World" to something more appropriate.-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="w3.css">
-    <link rel="stylesheet" href="w3-colors-flat.css">
-</head>
+https://www.w3schools.com/w3css/default.asp
+https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
+-->
+	
+   <head> 
+      <title>Hello World</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="w3.css">
+      <link rel="stylesheet" href="w3-colors-flat.css">
+   </head> 
 
 <script>
-    var allergy_count = 0;
-    var cold_count = 0;
+var benign_count = 0;
+var malignant_count = 0;
 
-    function allergyAdd() {
-        allergy_count = allergy_count + 1;
-        alert(allergy_count);
-    }
+function benignAdd() {
+    benign_count = benign_count + 1;
+    alert("benign count : " + benign_count);
+}//Establishes initial value for benign variable and malignant variable count at zero//
 
-    function coldAdd() {
-        cold_count = cold_count + 1;
-        alert(cold_count); //Added the alert pop up to count the cold count.
-    }
+function malignantAdd() {
+    malignant_count = malignant_count + 1;
+    alert("malignant count : " + malignant_count);
+}//When the button that has the malignantAdd function is clicked the total score for malignant adds up by one//
 
-    function newtext() {
-        //Added a new function and named it "newtext" for when text on page 5 is changed to probability text.;
-        var percentcold = cold_count / 4 * 100 // Created variable to keep count of cold symptoms and calculate probability percentage.;
-        var percentallergy = allergy_count / 4 * 100 // Created variable to keep count of allergy symptoms and calculate probability percentage.;
-        var resultText = document.getElementById("results");//Added variable for the results content on paeg 5.;
-        resultText.innerHTML = "Probability it is allergies =" + percentallergy + "% <br> Probability it is a cold =" + percentcold + "%"//This changes the results content to the final probability/diagnosis. Added percentage symbols.
-    }
+function diagnosisResults() {
+    var benignPercent = (benign_count /5) * 100;
+    var malignantPercent = (malignant_count /5) * 100;
+    var resultText = document.getElementById("results");
+    resultText.innerHTML = "Probability it is benign = " + benignPercent + "%" + "<br> Probability it is malignant = " + malignantPercent + "%";
+}//The given function calculates the probability of the mole being benign versus the probability of it being malignant by dividing the benign and malignant counts by four and then multiplying by a 100//
+
 </script>
 
-<style>
-    .body {
-        margin: 0em;
-    }
+<script type="text/javascript">
+function namet() {
+var input = document.getElementById("textbox").value; 
+var input2 = document.getElementById("location").value;
+alert( "Name : " +input+" Location : " +input2); window.location.assign("anypage.html")
+ } 
+function diagnose() {
+            var age = parseInt(document.getElementById('ageInput').value);
+            var resultText = document.getElementById('diagnosisResult');
+            
+            if (age < 20) {
+                resultText.innerHTML = "You are unlikely to have skin cancer at your age.";
+            } else {
+                resultText.innerHTML = "Please consult a healthcare professional for an accurate diagnosis.";
+            }
+        }
+</script>
 
-    .page {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: -100vw;
-        overflow-y: auto;
-        z-index: 0;
-        background-color: hsl(0, 0%, 100%);
-    }
 
-    .page:target {
-        left: 0vw;
-        z-index: 1;
-    }
+<style>	
+.body {
+     margin: 0em;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 0;
+    background-color: hsl(0,0%,100%);
+}
+
+  .page:target {
+    left: 0vw;
+    z-index: 1;
+}
+
+
 </style>
 
 <body>
-    <div id="header" class="w3-container w3-flat-green-sea">
-        <!--Changed carrot color to green sea color.-->
-        <h1>Cold or Allergies?</h1>
-    </div>
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Skin Cancer Diagnostic</h1>
+</div>
+
+ 
+<div class="page" id="one">
 
     <div id="content" class="w3-container">
-        <p>Are you feeling like you might have a cold but wonder if it is allergies? Answer a few short questions to find out!</p>
-        <!--/Added a question mark to first sentence-->
-        <a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
-        <!--/Clicking this button takes the participant to the next page, first question.-->
         <p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+        
         <p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
 
-        <div class="page" id="one">
-            <!--/This begins the first page, first diagnostic question-->
-            <div id="header" class="w3-container w3-flat-green-sea">
-                <!--/Changed carrot color to green sea.-->
-                <h1>Question 1</h1>
-            </div>
+	<p>Do you have skin issues and are wondering if they may be cancerous? Take the following test to find out! First, take a photo of the area of the mole you suspect to be cancerous, then move to the next page. </p>
 
-            <div id="content" class="w3-container">
-                <p>Are your eyes watery or itchy?</p>
-                <!--/Inserted first diagnostic question-->
-                <a href="#two" onclick="allergyAdd();" class="w3-btn w3-flat-nephritis">Yes</a>
-                <!--/Button takes participant to next page, second question. Button counts for allergy symptoms. Color was changed from carrot to nephritis.-->
-                <a href="#two" onclick="coldAdd();" class="w3-btn w3-flat-alizarin">No</a>
-                <!--/Button takes participant to next page, second question. Button counts for cold symptoms. Color was changed from carrot to alizarin.-->
-            </div>
-            <!--/This division allows for separation to begin next page.-->
-        </div>
+     <h1>Skin Cancer Diagnosis</h1>
+    <p>Please enter your age:</p>
+    <input type="text" id="ageInput">
+    <button onclick="diagnose()">Diagnose</button>
+    <p id="diagnosisResult"></p>
 
-        <div class="page" id="two">
-            <!--/This begins the second page, second diagnostic question.-->
-            <div class="w3-container w3-flat-green-sea">
-                <!--/Changed carrot color to green sea.-->
-                <h1>Question 2</h1>
-                <!--/Inserted header for Question 2-->
-            </div>
+        <a href="#two" class="w3-btn w3-black">Click here to begin!</a>
+    </div>
+</div>
 
-            <div id="content" class="w3-container">
-                <p>Do you have a fever?</p>
-                <!--/Inserted second diagnostic question.-->
-                <a href="#three" onclick="coldAdd();" class="w3-btn w3-flat-nephritis"> Yes </a>
-                <!--/Button takes participant to next page, third question. Button counts for cold symptoms. Color was changed from carrot to nephritis.-->
-                <a href="#
+
+<!--This is the start of my page 2-->
+<div class="page" id="two">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Is your mole symmetrical? (Are the two halves of your mole mirror images of each other?) </p> <!--This is my question 1-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#three"  onclick="benignAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the benign count-->
+		<a href="#three"  onclick="malignantAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the malignant count-->
+         	
+	</div>
+</div> <!--This is the end of my page 2 question and content→
+
+<!--This is the start of my page 3-->
+<div class="page" id="three">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Does your mole have an irregular or poorly defined border that blends into the surrounding skin? </p> <!--This is my question 2-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		
+		<a href="#four"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#four"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 3 question and content-->
+
+<!--This is the start of my page 4-->
+<div class="page" id="four">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Does your mole have one uniform color or has multiple colors </p> <!--This is my question 3-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#five"  onclick="benignAdd();" class="w3-btn w3-black">Uniform</a>
+		<!--If the user answers uniform to this question, it will add one to the benign count-->
+		<a href="#five"  onclick="malignantAdd();" class="w3-btn w3-black">Multiple</a>
+		<!--If the user answers Multiple to this question, it will add one to the malignant count-->
+         	
+	</div>
+</div> <!--This is the end of my page 4 question and content-->
+
+<!--This is the start of my page 5-->
+<div class="page" id="five">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p> Is your mole larger than 6 mm (about the size of a pencil eraser)? </p> <!--This is my question 4-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#six"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#six"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 5 question and content→
+
+<!--This is the start of my page 6-->
+<div class="page" id="six">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>  Has your mole changed over time, such as growing larger or changing color?</p> <!--This is my question 5-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#seven"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#seven"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 6 question and content-->
+
+<div class="page" id="seven">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Results!</h1>
+	</div>	
+
+	<div id="content" class="w3-container">
+		<p id="results">Click the button to know whether your mole is either benign or malignant.</p><!--This is the text that changes with the resultText function to become probability (results) statement.-->
+		<a href="#seven" onclick="diagnosisResults();" class="w3-btn w3-black"> Click me for results! </a>
+	
+	</div>
+	<!--This concludes the pages and questionnaire.-->
+
+</div>
+
+
+
+
+</body>
+</html>
