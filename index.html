@@ -36,6 +36,33 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 
 
 <script>
+
+var benign_count = 0;
+        var malignant_count = 0;
+	
+//Establishes initial value for benign variable and malignant variable count at zero//
+
+        function benignAdd(){
+            benign_count = benign_count + 1;
+		alert("benign count : " + benign_count);
+        }
+	
+//When the button that has the benignAdd function is clicked the total score for benign adds up by one//
+
+        function malignantAdd(){
+            malignant_count = malignant_count + 1;
+		alert("malignant count : " + malignant_count);
+        }
+//When the button that has the malignantAdd function is clicked the total score for malignant adds up by one//
+
+	function diagnosisResults(){
+		var benignPercent = (benign_count/4) * 100;
+		var malignantPercent = (malignant_count/4) * 100;
+		var resultText = document.getElementById("results");
+		resultText.innerHTML = "Probability it is benign = " + benignPercent + "%" + "<br> Probability it is malignant = " + malignantPercent + "%";
+	}
+//The given function calculates the probability of the mole being benign versus the probability of it being malignant by dividing the benign and malignant counts by four and then multiplying by a 100//
+
  
  function detectVerticalSquash(img) {
   var iw = img.naturalWidth, ih = img.naturalHeight;
@@ -87,6 +114,14 @@ var reader = new FileReader();
           var canvas = document.getElementById('myCanvas');
           var context = canvas.getContext("2d");
           drawImageIOSFix(context,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500);
+	
+function diagnosisResults(){
+		var benignPercent = (benign_count/5) * 100;
+		var malignantPercent = (malignant_count/5) * 100;
+		var resultText = document.getElementById("results");
+		resultText.innerHTML = "Probability it is benign = " + benignPercent + "%" + "<br> Probability it is malignant = " + malignantPercent + "%";
+	}
+//The given function calculates the probability of the mole being benign versus the probability of it being malignant by dividing the benign and malignant counts by four and then multiplying by a 100//
 
 
 </script>
@@ -101,9 +136,6 @@ var reader = new FileReader();
 .page {
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -100vw;
     overflow-y: auto;
     z-index: 0;
     background-color: hsl(0,0%,100%);
@@ -123,16 +155,19 @@ var reader = new FileReader();
 </div>
 	
 <div class="page" id="one">
-	  <div id="header" class="w3-container w3-flat-carrot"> <!--creating the header for Q1-->
-		  <h1>Do you have skin issues and are wondering if they may be cancerous? Take the following test to find out! First, take a photo of the area of the mole you suspect to be cancerous, then move to the next page.</h1><!-- This introduces the user to the purpose of the website diagnostic and gives instructions on how to proceed→
-	
-	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
- 	
-	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
 
-<a href="#two" class="w3-btn w3-black"> Click here to begin! </a> <!--This adds a button that takes you to page two to begin the questions→
+    <div id="content" class="w3-container">
+        <p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+        
+        <p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
 
-	  </div>
+	<p>Do you have skin issues and are wondering if they may be cancerous? Take the following test to find out! First, take a photo of the area of the mole you suspect to be cancerous, then move to the next page. </p>
+
+        <a href="#two" class="w3-btn w3-black">Click here to begin!</a>
+    </div>
+</div>
+
+
 <!--This is the start of my page 2-->
 <div class="page" id="two">
 	<div class="w3-container w3-flat-carrot">
@@ -150,6 +185,96 @@ var reader = new FileReader();
          	
 	</div>
 </div> <!--This is the end of my page 2 question and content→
+
+<!--This is the start of my page 3-->
+<div class="page" id="three">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Does your mole have an irregular or poorly defined border that blends into the surrounding skin? </p> <!--This is my question 2-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		
+		<a href="#four"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#four"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 3 question and content-->
+
+<!--This is the start of my page 4-->
+<div class="page" id="four">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Does your mole have one uniform color or has multiple colors </p> <!--This is my question 3-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#five"  onclick="benignAdd();" class="w3-btn w3-black">Uniform</a>
+		<!--If the user answers uniform to this question, it will add one to the benign count-->
+		<a href="#five"  onclick="malignantAdd();" class="w3-btn w3-black">Multiple</a>
+		<!--If the user answers Multiple to this question, it will add one to the malignant count-->
+         	
+	</div>
+</div> <!--This is the end of my page 4 question and content-->
+
+<!--This is the start of my page 5-->
+<div class="page" id="five">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p> Is your mole larger than 6 mm (about the size of a pencil eraser)? </p> <!--This is my question 4-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#six"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#six"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 5 question and content→
+
+<!--This is the start of my page 6-->
+<div class="page" id="six">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>  Has your mole changed over time, such as growing larger or changing color?</p> <!--This is my question 5-->
+		<!--This is where my user can answer the question via yes or no buttons-->
+		<!--My user will be sent to the next page after answering the question-->
+		<a href="#seven"  onclick="malignantAdd();" class="w3-btn w3-black">Yes</a>
+		<!--If the user answers yes to this question, it will add one to the malignant count-->
+		<a href="#seven"  onclick="benignAdd();" class="w3-btn w3-black">No</a>
+		<!--If the user answers no to this question, it will add one to the benign count-->
+		
+         	
+	</div>
+</div> <!--This is the end of my page 6 question and content-->
+
+<div class="page" id="eight"><!--/This begins the last page, final results.-->
+	<div class="w3-container w3-black"><!--Header is black→
+		<h1>Results</h1><!--Inserted results header-->
+	</div>	
+
+	<div id="content" class="w3-container">
+		<p id="results">Click the button to know whether your mole is either benign or malignant.</p><!--This is the text that changes with the resultText function to become probability (results) statement.-->
+		<a href="#nine" onclick="resultText();" class="w3-btn w3-pink"> Click me for results! </a><!--Clicking on button allows for the text change.Changed button to pink color.-->
+	
+	</div>
+	<!--This concludes the pages and questionnaire.-->
+
+</div>
 
 
 
